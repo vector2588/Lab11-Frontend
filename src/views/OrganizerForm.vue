@@ -7,7 +7,7 @@
       <BaseInput v-model="organizer.name" type="text" label="Title" />
 
       <h3>The image of the Organizer</h3>
-      <UploadImages @changed="handleImages" />
+      <UploadImages @changed="handleImages" :max="1" />
 
       <button type="submit">Submit</button>
     </form>
