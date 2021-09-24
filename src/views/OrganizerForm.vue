@@ -45,7 +45,7 @@ export default {
           OrganizerService.saveOrganizer(this.organizer).then((response) => {
             console.log(response)
             this.$router.push({
-               name: 'EventLayout',
+               name: 'OrganizerLayout',
                params: { id: response.data.id }
             })
             this.GStore.flashMessage =

@@ -15,6 +15,9 @@ export default {
   saveOrganizer(organizer) {
     return apiClient.post('/organizers', organizer)
   },
+  getOrganizer(id) {
+    return apiClient.get('/organizers/' + id)
+  },
   uploadFile(file) {
     let formData = new FormData()
     formData.append('file', file)

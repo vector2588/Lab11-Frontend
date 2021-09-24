@@ -13,6 +13,7 @@ import EventService from '@/services/EventService.js'
 import GStore from '@/store'
 import OrganizerService from '@/services/OrganizerService.js'
 import AddOrganizer from '@/views/OrganizerForm.vue'
+import OrganizerLayout from '@/views/organizer/Layout.vue'
 
 const routes = [
   {
@@ -46,6 +47,31 @@ const routes = [
     name: 'AddOrganizer',
     component: AddOrganizer,
   },
+  {
+    path: '/organizer/:id',
+    name: 'OrganizerLayout',
+    props: true,
+    component: OrganizerLayout,
+    beforeEnter: (to) => {
+      return OrganizerService.getOrganizer(to.params.id) // Return and params.id
+        .then((response) => {
+          // Still need to set the data here
+          GStore.organizer = response.data // <--- Store the event
+        })
+        .catch((error) => {
+          if (error.response && error.response.status == 404) {
+            return {
+              // <--- Return
+              name: '404Resource',
+              params: { resource: 'organizer' }
+            }
+          } else {
+            return { name: 'NetworkError' } // <--- Return
+          }
+        })
+    },
+  },
+
   {
     path: '/event/:id',
     name: 'EventLayout',
